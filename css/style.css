@@ -1,32 +1,51 @@
 :root {
-  --bg: #fdfdfd;
-  --accent: #4caf50;
-  --accent-dark: #357a38;
-  --text: #222;
+  --bg-gradient-start: #eafaf1;
+  --bg-gradient-end: #dcf5e6;
+  --accent: #43a047;
+  --accent-light: #66bb6a;
+  --accent-dark: #2e7031;
+  --text: #24313a;
   --card-bg: #ffffff;
+  --card-border: #e7ebee;
+  --neutral-bg: #f4f6f8;
+  --warn: #f5a524;
+  --warn-dark: #c97c0a;
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 26px;
+  --shadow-sm: 0 2px 6px rgba(20, 30, 40, 0.08);
+  --shadow-md: 0 8px 20px rgba(20, 30, 40, 0.12);
 }
 
 body[data-theme='green'] {
-  --bg: #eafaf1;
+  --bg-gradient-start: #eafaf1;
+  --bg-gradient-end: #d7f3e3;
   --accent: #43a047;
+  --accent-light: #66bb6a;
   --accent-dark: #2e7031;
 }
 
 body[data-theme='blue'] {
-  --bg: #e8f3fb;
+  --bg-gradient-start: #e8f3fb;
+  --bg-gradient-end: #d3e9fa;
   --accent: #1e88e5;
+  --accent-light: #4ea4ec;
   --accent-dark: #145ea8;
 }
 
 body[data-theme='purple'] {
-  --bg: #f3ebfb;
+  --bg-gradient-start: #f3ebfb;
+  --bg-gradient-end: #e6d7f7;
   --accent: #8e24aa;
+  --accent-light: #ab47bc;
   --accent-dark: #611a74;
 }
 
 body[data-theme='pink'] {
-  --bg: #fdeaf3;
+  --bg-gradient-start: #fdeaf3;
+  --bg-gradient-end: #fbd9e9;
   --accent: #ec407a;
+  --accent-light: #f06292;
   --accent-dark: #ad1457;
 }
 
@@ -37,33 +56,46 @@ body[data-theme='pink'] {
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
+  min-height: 100%;
 }
 
 body {
-  background: var(--bg);
+  background: linear-gradient(160deg, var(--bg-gradient-start), var(--bg-gradient-end));
+  background-attachment: fixed;
   color: var(--text);
-  font-family: 'Comic Sans MS', 'Segoe UI', sans-serif;
+  font-family: 'Baloo 2', 'Segoe UI', sans-serif;
   display: flex;
   justify-content: center;
+  position: relative;
 }
 
 #app {
   width: 100%;
   max-width: 480px;
-  padding: 24px 16px 48px;
+  padding: 32px 18px 56px;
 }
 
 h1, h2 {
   text-align: center;
   color: var(--accent-dark);
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+h1 {
+  font-size: 1.6rem;
+}
+
+h2 {
+  font-size: 1.15rem;
+  margin-bottom: 4px;
 }
 
 .screen {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 18px;
 }
 
 .grid {
@@ -79,79 +111,103 @@ h1, h2 {
 
 button {
   font-family: inherit;
+  font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
   border: none;
-  border-radius: 12px;
-  padding: 12px;
+  border-radius: var(--radius-md);
+  padding: 14px;
   background: var(--accent);
+  background-image: linear-gradient(160deg, var(--accent-light), var(--accent));
   color: white;
-  transition: transform 0.1s ease;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+button:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
 }
 
 button:active {
-  transform: scale(0.95);
+  transform: scale(0.96) translateY(0);
+  box-shadow: var(--shadow-sm);
 }
 
 button.selected {
-  box-shadow: 0 0 0 3px var(--accent-dark) inset;
+  box-shadow: 0 0 0 3px var(--accent-dark) inset, var(--shadow-sm);
 }
 
 .profile-button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-size: 2.5rem;
   background: var(--card-bg);
+  background-image: none;
   color: var(--text);
-  border: 3px solid var(--accent);
+  border: 2px solid var(--card-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.profile-button:hover {
+  border-color: var(--accent);
 }
 
 .avatar-button {
   font-size: 2.25rem;
   background: var(--card-bg);
-  border: 2px solid var(--accent);
+  background-image: none;
+  border: 2px solid var(--card-border);
+  box-shadow: var(--shadow-sm);
 }
 
 .avatar-button.selected {
   background: var(--accent);
+  background-image: linear-gradient(160deg, var(--accent-light), var(--accent));
+  border-color: var(--accent-dark);
 }
 
 .color-swatch {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border: 3px solid transparent;
+  border: 3px solid white;
+  box-shadow: var(--shadow-sm);
   cursor: pointer;
 }
 
 .color-swatch.selected {
-  border-color: var(--text);
+  box-shadow: 0 0 0 3px var(--text), var(--shadow-sm);
 }
 
-.color-swatch.green { background: #43a047; }
-.color-swatch.blue { background: #1e88e5; }
-.color-swatch.purple { background: #8e24aa; }
-.color-swatch.pink { background: #ec407a; }
+.color-swatch.green { background: linear-gradient(160deg, #66bb6a, #43a047); }
+.color-swatch.blue { background: linear-gradient(160deg, #4ea4ec, #1e88e5); }
+.color-swatch.purple { background: linear-gradient(160deg, #ab47bc, #8e24aa); }
+.color-swatch.pink { background: linear-gradient(160deg, #f06292, #ec407a); }
 
 .exercise-prompt {
-  font-size: 2.5rem;
-  font-weight: bold;
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: var(--accent-dark);
   background: var(--card-bg);
-  border-radius: 16px;
-  padding: 24px 32px;
-  min-width: 200px;
+  border-radius: var(--radius-lg);
+  padding: 28px 36px;
+  min-width: 220px;
   text-align: center;
+  box-shadow: var(--shadow-md);
 }
 
 .answer-display {
-  font-size: 1.75rem;
+  font-size: 1.9rem;
+  font-weight: 700;
   min-height: 2.5rem;
   background: var(--card-bg);
-  border-radius: 12px;
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-sm);
   padding: 8px 24px;
-  min-width: 120px;
+  min-width: 140px;
   text-align: center;
 }
 
@@ -160,6 +216,38 @@ button.selected {
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   width: 100%;
+}
+
+/* Quiet, neutral digit buttons so the check/backspace actions stand out */
+.numpad-digit {
+  background: var(--neutral-bg);
+  background-image: none;
+  color: var(--text);
+  border: 2px solid var(--card-border);
+  box-shadow: none;
+  font-size: 1.15rem;
+}
+
+.numpad-digit:hover {
+  border-color: var(--accent);
+  box-shadow: none;
+  transform: none;
+}
+
+/* Bold primary action: confirm the typed answer */
+.numpad-check {
+  grid-column: 1 / -1;
+  background: var(--accent);
+  background-image: linear-gradient(160deg, var(--accent-light), var(--accent-dark));
+  font-size: 1.1rem;
+  box-shadow: var(--shadow-md);
+}
+
+/* Distinct warm "undo" color, separate from both digits and check */
+.numpad-backspace {
+  background: var(--warn);
+  background-image: linear-gradient(160deg, #ffc266, var(--warn-dark));
+  font-size: 1.3rem;
 }
 
 .comparison-buttons {
@@ -174,7 +262,7 @@ button.selected {
 
 .feedback {
   font-size: 1.25rem;
-  font-weight: bold;
+  font-weight: 700;
   min-height: 1.5rem;
 }
 
@@ -186,18 +274,27 @@ button.selected {
   justify-content: space-between;
   width: 100%;
   font-size: 0.95rem;
+  font-weight: 600;
   background: var(--card-bg);
-  border-radius: 12px;
-  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  box-shadow: var(--shadow-sm);
 }
 
 .settings-icon {
   position: absolute;
   top: 16px;
   right: 16px;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
+  background: var(--card-bg);
+  background-image: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  box-shadow: var(--shadow-sm);
   cursor: pointer;
 }
 
@@ -211,15 +308,40 @@ button.selected {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 3rem;
-  background: rgba(255, 255, 255, 0.85);
   pointer-events: none;
-  animation: pop 1.2s ease;
+  overflow: hidden;
+}
+
+.celebration-card {
+  background: var(--card-bg);
+  color: var(--accent-dark);
+  font-size: 1.6rem;
+  font-weight: 800;
+  text-align: center;
+  padding: 22px 32px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  animation: pop 1.4s ease;
+  max-width: 320px;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -10px;
+  width: 10px;
+  height: 14px;
+  border-radius: 3px;
+  animation: confetti-fall 1.3s ease-in forwards;
 }
 
 @keyframes pop {
   0% { transform: scale(0.5); opacity: 0; }
-  30% { transform: scale(1.1); opacity: 1; }
-  70% { transform: scale(1); opacity: 1; }
+  30% { transform: scale(1.08); opacity: 1; }
+  75% { transform: scale(1); opacity: 1; }
   100% { transform: scale(1); opacity: 0; }
+}
+
+@keyframes confetti-fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(70vh) rotate(260deg); opacity: 0; }
 }

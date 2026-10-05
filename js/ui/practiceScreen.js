@@ -108,12 +108,15 @@ export function renderPracticeScreen(container, { type, range, onRoundComplete }
 
       for (const digit of ['1', '2', '3', '4', '5', '6', '7', '8', '9']) {
         const button = document.createElement('button');
+        button.className = 'numpad-digit';
         button.textContent = digit;
         button.addEventListener('click', () => addDigit(digit));
         numpad.appendChild(button);
       }
 
       const backspaceButton = document.createElement('button');
+      backspaceButton.className = 'numpad-backspace';
+      backspaceButton.setAttribute('aria-label', 'Smazat');
       backspaceButton.textContent = '⌫';
       backspaceButton.addEventListener('click', () => {
         if (awaitingAdvance) return;
@@ -123,11 +126,13 @@ export function renderPracticeScreen(container, { type, range, onRoundComplete }
       numpad.appendChild(backspaceButton);
 
       const zeroButton = document.createElement('button');
+      zeroButton.className = 'numpad-digit';
       zeroButton.textContent = '0';
       zeroButton.addEventListener('click', () => addDigit('0'));
       numpad.appendChild(zeroButton);
 
       const checkButton = document.createElement('button');
+      checkButton.className = 'numpad-check';
       checkButton.textContent = 'Zkontrolovat';
       checkButton.addEventListener('click', () => {
         if (typedAnswer === '') return;
